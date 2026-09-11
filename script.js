@@ -43,3 +43,27 @@ function calcGpaResult(validCourses) {
         weightedGpa: weightedGpa.toFixed(2)
     }
 }
+function inputCourse() {
+    const list = [];
+    let count = Number(prompt("请输入课程门数："));
+    if(isNaN(count) || count <=0) {
+        alert("输入非法！");
+        return [];
+    }
+    for(let i=0;i<count;i++){
+        const name = prompt(`第${i+1}门课名称`);
+        const score = prompt(`第${i+1}门课分数`);
+        const credit = prompt(`第${i+1}门课学分`);
+        list.push({name, score, credit});
+    }
+    return list;
+}
+
+const courseList = inputCourse();
+
+const cleanedArr = courseList.map(item => cleanCourseData(item));
+const validCourseArr = cleanedArr.filter(item => item !== null);
+
+console.log(" 有效课程列表：", validCourseArr);
+const result = calcGpaResult(validCourseArr);
+console.log(" 统计结果：", result);
